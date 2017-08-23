@@ -2,12 +2,12 @@ pragma solidity ^0.4.10;
 
 
 contract PeterCoin {
-    address owner = msg.sender;
+    address owner;
 
     mapping (address => uint256) balances;
     address[] accounts;
 
-    uint lastUpdated = now;
+    uint lastUpdated;
     uint constant TRIGGER_TIME = 4 weeks;
     
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
@@ -15,6 +15,13 @@ contract PeterCoin {
 
     function name() constant returns (string) { return "PeterCoin"; }
     function symbol() constant returns (string) { return "PET"; }
+
+    function PeterCoin() {
+        owner = msg.sender;
+        balances[owner] = 1000;
+        accounts.push(owner);
+        lastUpdated = now;
+    }
 
     function balanceOf(address _owner) constant returns (uint256) { return balances[_owner]; }
 
